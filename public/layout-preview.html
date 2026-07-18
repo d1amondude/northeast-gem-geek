@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gem Geek — layout preview (phone / tablet)</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #0a0a0c;
+      color: #e8e4dc;
+      padding: 24px 16px 48px;
+    }
+    h1 { font-size: 1.25rem; color: #c4a574; margin: 0 0 8px; }
+    p { color: #94a3b8; font-size: 0.9rem; margin: 0 0 24px; }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .frame-wrap { text-align: center; }
+    .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c4a574;
+      margin-bottom: 10px;
+    }
+    .bezel {
+      background: #1a1a1e;
+      border: 2px solid #333;
+      border-radius: 18px;
+      padding: 10px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    iframe {
+      border: 0;
+      border-radius: 10px;
+      background: #000;
+      display: block;
+    }
+    .phone .bezel { width: 390px; }
+    .phone iframe { width: 375px; height: 720px; }
+    .tablet .bezel { width: 820px; max-width: 100%; }
+    .tablet iframe { width: 768px; max-width: 100%; height: 900px; }
+    a { color: #c4a574; }
+  </style>
+</head>
+<body>
+  <h1>Gem Geek — layout check</h1>
+  <p>
+    Side-by-side phone (375) and tablet (768). App:
+    <a href="/" target="_blank">open full</a>
+  </p>
+  <div class="row">
+    <div class="frame-wrap phone">
+      <div class="label">Phone · 375×720</div>
+      <div class="bezel"><iframe src="/" title="Phone layout"></iframe></div>
+    </div>
+    <div class="frame-wrap tablet">
+      <div class="label">Tablet · 768×900</div>
+      <div class="bezel"><iframe src="/" title="Tablet layout"></iframe></div>
+    </div>
+  </div>
+</body>
+</html>

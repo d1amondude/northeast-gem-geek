@@ -1,0 +1,6 @@
+{
+  "name": "Northeast Gemological Lab",
+  "description": "Preloaded professional-grade gemstone library and AI-powered laboratory assistant for gemstone authenticity, mineral property verification, and diagnostic identification.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
