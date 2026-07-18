@@ -1,18 +1,16 @@
-# Northeast Gem Geek — second Render service (safe alongside your existing ones)
-# Dashboard: New → Blueprint → connect this repo, or New Web Service with the settings below.
+# Northeast Gem Geek — Web Service on Render (Node, not Bun)
 services:
   - type: web
     name: northeast-gem-geek
     runtime: node
     plan: free
     region: oregon
-    # --include=dev so esbuild/tsx stay available even when NODE_ENV=production
-    buildCommand: npm ci --include=dev && npm run build
-    startCommand: npm start
+    # Must produce dist/server.cjs — do not use Bun-only install
+    buildCommand: npm install && npm run build && test -f dist/server.cjs && ls -la dist/
+    startCommand: node dist/server.cjs
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
-      # Set this in the Render dashboard (Environment) — do not commit the real key
       - key: GEMINI_API_KEY
         sync: false
