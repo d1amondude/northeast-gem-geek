@@ -14,3 +14,6 @@ services:
         value: production
       - key: GEMINI_API_KEY
         sync: false
+      # Set to 1 while testing paywall before Apple IAP ships
+      - key: ALLOW_DEV_BILLING
+        sync: false

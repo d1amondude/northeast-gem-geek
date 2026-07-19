@@ -3,6 +3,15 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
+import type { PlanId } from "./src/data/pricingPlans";
+import {
+  accountPublicView,
+  activatePlan,
+  checkAiQuota,
+  consumeAiQuota,
+  getOrCreateAccount,
+  getPlans,
+} from "./db";
 
 dotenv.config();
 
@@ -22,6 +31,91 @@ const ai = new GoogleGenAI({
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+// ── Billing / subscription DB ──────────────────────────────────────────
+app.get("/api/billing/plans", (_req, res) => {
+  res.json({ plans: getPlans() });
+});
+
+app.get("/api/billing/status", (req, res) => {
+  const deviceId = String(req.query.deviceId || req.header("X-GemGeek-Device-Id") || "").trim();
+  if (!deviceId) {
+    res.status(400).json({ error: "deviceId is required." });
+    return;
+  }
+  const account = getOrCreateAccount(deviceId);
+  res.json(accountPublicView(account));
+});
+
+/** Activate a plan (dev/promo until Apple IAP is wired). */
+app.post("/api/billing/activate", (req, res) => {
+  try {
+    const { deviceId, planId, source } = req.body || {};
+    if (!deviceId || !planId) {
+      res.status(400).json({ error: "deviceId and planId are required." });
+      return;
+    }
+    const allowed: PlanId[] = ["free", "pro_monthly", "pro_annual", "trade_monthly"];
+    if (!allowed.includes(planId)) {
+      res.status(400).json({ error: "Invalid planId." });
+      return;
+    }
+    // Block silent free→trade abuse in prod without a key; allow free anytime
+    const src = source === "promo" || source === "apple" || source === "stripe" ? source : "dev";
+    if (process.env.NODE_ENV === "production" && src === "dev" && planId !== "free") {
+      // Still allow for TestFlight/demo: set ALLOW_DEV_BILLING=1 on Render to test paywall
+      if (process.env.ALLOW_DEV_BILLING !== "1") {
+        res.status(403).json({
+          error: "In-app purchase coming soon. Set ALLOW_DEV_BILLING=1 to test plan activation.",
+          code: "IAP_PENDING",
+        });
+        return;
+      }
+    }
+    const account = activatePlan(String(deviceId), planId as PlanId, src);
+    res.json(accountPublicView(account));
+  } catch (e: any) {
+    res.status(500).json({ error: e.message || "Activation failed" });
+  }
+});
+
+app.get("/api/health", (_req, res) => {
+  res.json({ ok: true, service: "northeast-gem-geek", billing: true });
+});
+
+/** Check AI quota (no consume yet). Handlers call consumeAiAfterValidation after body checks. */
+function requireAiQuota(req: express.Request, res: express.Response, next: express.NextFunction) {
+  const deviceId = String(
+    req.header("X-GemGeek-Device-Id") || req.body?.deviceId || req.query.deviceId || ""
+  ).trim();
+  if (!deviceId) {
+    res.status(400).json({
+      error: "Missing device id. Refresh the app and try again.",
+      code: "DEVICE_REQUIRED",
+    });
+    return;
+  }
+  const decision = checkAiQuota(deviceId);
+  if (!decision.allowed) {
+    res.status(402).json({
+      error: decision.reason,
+      code: "QUOTA_EXCEEDED",
+      upgradeRequired: decision.account.planId === "free",
+      billing: accountPublicView(decision.account),
+    });
+    return;
+  }
+  (req as any).gemGeekDeviceId = deviceId;
+  (req as any).gemGeekBilling = accountPublicView(decision.account);
+  next();
+}
+
+function consumeAiAfterValidation(req: express.Request) {
+  const deviceId = (req as any).gemGeekDeviceId as string | undefined;
+  if (deviceId) {
+    (req as any).gemGeekBilling = accountPublicView(consumeAiQuota(deviceId).account);
+  }
+}
 
 // Helper function to handle Gemini API requests with retry and fallback to gemini-3.1-flash-lite
 async function generateContentWithRetry(params: {
@@ -134,13 +228,14 @@ As an AI model trained on standard gemological reference guidelines, you MUST ap
 `;
 
 // API route: General Gemological Assistant Q&A
-app.post("/api/gemini/ask", async (req, res) => {
+app.post("/api/gemini/ask", requireAiQuota, async (req, res) => {
   try {
     const { message, history } = req.body;
     if (!message) {
       res.status(400).json({ error: "Message is required." });
       return;
     }
+    consumeAiAfterValidation(req);
 
     // Standard Gemologist System Instruction
     const systemInstruction = `You are a world-class certified Master Gemologist and laboratory expert.
@@ -189,9 +284,18 @@ ${GEM_DIAGNOSTIC_DATABASE}`;
 });
 
 // API route: Gemstone Identification Assistant from lab parameters
-app.post("/api/gemini/identify", async (req, res) => {
+app.post("/api/gemini/identify", requireAiQuota, async (req, res) => {
   try {
     const { color, refractiveIndex, specificGravity, hardness, crystalSystem, opticCharacter, birefringence, luster, inclusions } = req.body;
+
+    // Require at least one lab property so empty bodies cannot burn Gemini quota
+    const hasSignal = [color, refractiveIndex, specificGravity, hardness, crystalSystem, opticCharacter, birefringence, luster, inclusions]
+      .some((v) => v != null && String(v).trim().length > 0);
+    if (!hasSignal) {
+      res.status(400).json({ error: "Provide at least one laboratory property for identification." });
+      return;
+    }
+    consumeAiAfterValidation(req);
     
     const prompt = `Please identify the gemstone matching these recorded physical and optical laboratory properties:
 - Color: ${color || "Unknown / Not recorded"}
@@ -231,7 +335,7 @@ ${GEM_DIAGNOSTIC_DATABASE}`;
 });
 
 // API route: Authenticity & Verification Test Planner
-app.post("/api/gemini/verify", async (req, res) => {
+app.post("/api/gemini/verify", requireAiQuota, async (req, res) => {
   try {
     const { gemstoneName, allegedSource, suspectedSimulants } = req.body;
 
@@ -239,6 +343,7 @@ app.post("/api/gemini/verify", async (req, res) => {
       res.status(400).json({ error: "Gemstone name is required." });
       return;
     }
+    consumeAiAfterValidation(req);
 
     const prompt = `Generate a specialized Gemological Verification & Authenticity Protocol for:
 Alleged Gemstone: **${gemstoneName}**
@@ -287,13 +392,14 @@ function parseBase64Image(dataString: string) {
 }
 
 // API route: Identify gemstone from captured or uploaded photo
-app.post("/api/gemini/analyze-photo", async (req, res) => {
+app.post("/api/gemini/analyze-photo", requireAiQuota, async (req, res) => {
   try {
     const { image, notes } = req.body;
     if (!image) {
       res.status(400).json({ error: "Image data is required." });
       return;
     }
+    consumeAiAfterValidation(req);
 
     const parsed = parseBase64Image(image);
 
@@ -347,7 +453,7 @@ ${GEM_DIAGNOSTIC_DATABASE}`,
 });
 
 // API route: Verify catalog gemstone image with Computer Vision AI
-app.post("/api/gemini/verify-catalog-item", async (req, res) => {
+app.post("/api/gemini/verify-catalog-item", requireAiQuota, async (req, res) => {
   try {
     const { gemId, imageUrl, gemName, species, formula, color, description } = req.body;
 
@@ -355,6 +461,7 @@ app.post("/api/gemini/verify-catalog-item", async (req, res) => {
       res.status(400).json({ error: "Image URL is required." });
       return;
     }
+    consumeAiAfterValidation(req);
 
     console.log(`AI Auditing Catalog Image for ${gemName || gemId}: ${imageUrl}`);
 

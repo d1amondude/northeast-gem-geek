@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "description": "Gem Geek pricing catalog seed (mirrors src/data/pricingPlans.ts)",
+  "researchNote": "Aligned with Rock Identifier / Jewelry ID yearly ~$40–50 and IGS $12–24/mo. Hero annual ~$4.17/mo.",
+  "plans": [
+    {
+      "id": "free",
+      "name": "Free",
+      "priceUsd": 0,
+      "interval": "none",
+      "aiCallsPerWeek": 3,
+      "aiCallsPerDay": 3
+    },
+    {
+      "id": "pro_monthly",
+      "name": "Pro",
+      "priceUsd": 7.99,
+      "interval": "month",
+      "appleProductId": "com.northeast.gemgeek.pro.monthly",
+      "aiCallsPerWeek": 200,
+      "aiCallsPerDay": 40
+    },
+    {
+      "id": "pro_annual",
+      "name": "Pro Annual",
+      "priceUsd": 49.99,
+      "interval": "year",
+      "effectiveMonthlyUsd": 4.17,
+      "highlighted": true,
+      "appleProductId": "com.northeast.gemgeek.pro.annual",
+      "aiCallsPerWeek": 200,
+      "aiCallsPerDay": 40
+    },
+    {
+      "id": "trade_monthly",
+      "name": "Trade",
+      "priceUsd": 14.99,
+      "interval": "month",
+      "appleProductId": "com.northeast.gemgeek.trade.monthly",
+      "aiCallsPerWeek": 500,
+      "aiCallsPerDay": 80
+    }
+  ]
+}

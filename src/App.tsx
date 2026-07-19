@@ -28,7 +28,8 @@ import {
   Ruler,
   Scale,
   ZoomIn,
-  X
+  X,
+  Crown
 } from "lucide-react";
 import { gemstonesDatabase, Gemstone } from "./data/gemstones";
 import {
@@ -42,10 +43,41 @@ import {
   type CutShapeId,
   type DepthProfile,
 } from "./data/gemWeightFormulas";
+import PaywallModal from "./components/PaywallModal";
+import {
+  billingHeaders,
+  fetchBillingStatus,
+  type BillingStatus,
+} from "./lib/billing";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+
+/** Gemini POST with device id + 402 paywall signal */
+async function geminiPost(url: string, body: Record<string, unknown>) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: billingHeaders(),
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({} as any));
+  if (res.status === 402) {
+    const err = new Error(data.error || "AI quota exceeded — upgrade to Pro") as Error & {
+      code?: string;
+      upgradeRequired?: boolean;
+      billing?: BillingStatus;
+    };
+    err.code = "QUOTA_EXCEEDED";
+    err.upgradeRequired = !!data.upgradeRequired;
+    err.billing = data.billing;
+    throw err;
+  }
+  if (!res.ok) {
+    throw new Error(data.error || `Request failed (${res.status})`);
+  }
+  return data;
+}
 
 /** Specimen photo from catalog imageUrl (real mineral/gem photos). No stock/Picsum fallbacks. */
 const getGemstoneImage = (gemOrId: Gemstone | string): string => {
@@ -62,6 +94,28 @@ const formatGemName = (gem: Gemstone) => (gem.rare ? `${gem.name}*` : gem.name);
 export default function App() {
   // Tab State: 'library' | 'identify' | 'verify' | 'photo' | 'consult'
   const [activeTab, setActiveTab] = useState<"library" | "identify" | "verify" | "photo" | "consult">("library");
+
+  // --- Billing / Pro paywall ---
+  const [billing, setBilling] = useState<BillingStatus | null>(null);
+  const [paywallOpen, setPaywallOpen] = useState(false);
+  const [paywallReason, setPaywallReason] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchBillingStatus()
+      .then(setBilling)
+      .catch(() => setBilling(null));
+  }, []);
+
+  const handleQuotaError = (err: unknown) => {
+    const e = err as Error & { code?: string; billing?: BillingStatus };
+    if (e?.code === "QUOTA_EXCEEDED") {
+      if (e.billing) setBilling(e.billing);
+      setPaywallReason(e.message);
+      setPaywallOpen(true);
+      return true;
+    }
+    return false;
+  };
 
   // --- Gem Library State ---
   const [searchTerm, setSearchTerm] = useState("");
@@ -132,39 +186,32 @@ export default function App() {
     setAuditLoading(prev => ({ ...prev, [gemId]: true }));
     try {
       const imageUrl = getGemstoneImage(gemId);
-      const res = await fetch("/api/gemini/verify-catalog-item", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          gemId,
-          imageUrl,
-          gemName: gem.name,
-          species: gem.species,
-          formula: gem.formula,
-          color: gem.color,
-          description: gem.description
-        })
+      const data = await geminiPost("/api/gemini/verify-catalog-item", {
+        gemId,
+        imageUrl,
+        gemName: gem.name,
+        species: gem.species,
+        formula: gem.formula,
+        color: gem.color,
+        description: gem.description,
       });
-      if (!res.ok) {
-        const errData = await res.json();
-        throw new Error(errData.error || "Failed to audit gemstone");
-      }
-      const data = await res.json();
-      setAuditReports(prev => ({ ...prev, [gemId]: data }));
+      setAuditReports((prev) => ({ ...prev, [gemId]: data }));
+      fetchBillingStatus().then(setBilling).catch(() => {});
     } catch (err: any) {
       console.error(err);
-      setAuditReports(prev => ({
+      if (handleQuotaError(err)) return;
+      setAuditReports((prev) => ({
         ...prev,
         [gemId]: {
           verified: false,
           confidence: 0,
           rating: "Mismatched",
           verdict: "AUDIT FAILURE",
-          critique: `Could not connect to AI diagnostic server: ${err.message}`
-        }
+          critique: `Could not connect to AI diagnostic server: ${err.message}`,
+        },
       }));
     } finally {
-      setAuditLoading(prev => ({ ...prev, [gemId]: false }));
+      setAuditLoading((prev) => ({ ...prev, [gemId]: false }));
     }
   };
 
@@ -211,27 +258,23 @@ export default function App() {
     setIsIdentifying(true);
     setIdentificationReport(null);
     try {
-      const res = await fetch("/api/gemini/identify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          color: labColor,
-          refractiveIndex: labRI,
-          specificGravity: labSG,
-          hardness: labHardness,
-          opticCharacter: labOpticChar,
-          inclusions: labInclusions,
-        }),
+      const data = await geminiPost("/api/gemini/identify", {
+        color: labColor,
+        refractiveIndex: labRI,
+        specificGravity: labSG,
+        hardness: labHardness,
+        opticCharacter: labOpticChar,
+        inclusions: labInclusions,
       });
-      const data = await res.json();
-      if (res.ok) {
-        setIdentificationReport(data.text);
-        autoSelectIdentifiedGem(data.text);
-      } else {
-        setIdentificationReport(`Error: ${data.error || "Could not complete identification request."}`);
-      }
+      setIdentificationReport(data.text);
+      autoSelectIdentifiedGem(data.text);
+      fetchBillingStatus().then(setBilling).catch(() => {});
     } catch (err: any) {
-      setIdentificationReport(`Error: Connection failed. ${err.message}`);
+      if (handleQuotaError(err)) {
+        setIdentificationReport(`Limit reached: ${err.message}`);
+      } else {
+        setIdentificationReport(`Error: ${err.message}`);
+      }
     } finally {
       setIsIdentifying(false);
     }
@@ -250,23 +293,19 @@ export default function App() {
     setIsVerifying(true);
     setVerificationReport(null);
     try {
-      const res = await fetch("/api/gemini/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          gemstoneName: verifyName,
-          allegedSource: verifySource,
-          suspectedSimulants: verifySimulants,
-        }),
+      const data = await geminiPost("/api/gemini/verify", {
+        gemstoneName: verifyName,
+        allegedSource: verifySource,
+        suspectedSimulants: verifySimulants,
       });
-      const data = await res.json();
-      if (res.ok) {
-        setVerificationReport(data.text);
-      } else {
-        setVerificationReport(`Error: ${data.error || "Could not generate verification guide."}`);
-      }
+      setVerificationReport(data.text);
+      fetchBillingStatus().then(setBilling).catch(() => {});
     } catch (err: any) {
-      setVerificationReport(`Error: Connection failed. ${err.message}`);
+      if (handleQuotaError(err)) {
+        setVerificationReport(`Limit reached: ${err.message}`);
+      } else {
+        setVerificationReport(`Error: ${err.message}`);
+      }
     } finally {
       setIsVerifying(false);
     }
@@ -643,68 +682,64 @@ export default function App() {
     setAiEstimatedProportions(null);
 
     try {
-      const res = await fetch("/api/gemini/analyze-photo", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          image: imageSrc,
-          notes: technicianNotes
-        })
+      const data = await geminiPost("/api/gemini/analyze-photo", {
+        image: imageSrc,
+        notes: technicianNotes,
       });
-      const data = await res.json();
-      if (res.ok) {
-        const fullText = data.text || "";
-        const parts = fullText.split("---ESTIMATED_PROPORTIONS---");
-        const mainReport = parts[0].trim();
-        setPhotoReport(mainReport);
+      const fullText = data.text || "";
+      const parts = fullText.split("---ESTIMATED_PROPORTIONS---");
+      const mainReport = parts[0].trim();
+      setPhotoReport(mainReport);
 
-        let autoSelected = false;
+      let autoSelected = false;
 
-        if (parts.length > 1) {
-          try {
-            const jsonText = parts[1].trim();
-            // Clean up possible markdown code blocks if the model generated them despite instructions
-            const cleanedJsonText = jsonText.replace(/```json/g, "").replace(/```/g, "").trim();
-            const parsedProportions = JSON.parse(cleanedJsonText);
-            setAiEstimatedProportions(parsedProportions);
+      if (parts.length > 1) {
+        try {
+          const jsonText = parts[1].trim();
+          const cleanedJsonText = jsonText.replace(/```json/g, "").replace(/```/g, "").trim();
+          const parsedProportions = JSON.parse(cleanedJsonText);
+          setAiEstimatedProportions(parsedProportions);
 
-            if (parsedProportions.species) {
-              const speciesLower = parsedProportions.species.toLowerCase();
-              const sortedGems = [...gemstonesDatabase].sort((a, b) => b.name.length - a.name.length);
-              const foundGem = sortedGems.find(g => {
-                const nameLower = g.name.toLowerCase();
-                const speciesLowerDb = g.species.toLowerCase();
-                return speciesLower.includes(nameLower) || 
-                       speciesLower.includes(speciesLowerDb) ||
-                       nameLower.includes(speciesLower) ||
-                       speciesLowerDb.includes(speciesLower);
-              });
-              if (foundGem) {
-                setSelectedGemId(foundGem.id);
-                // Trigger calculator update
-                if (gemSGMap[foundGem.id]) {
-                  setCalcGemType(foundGem.id);
-                  setCalcSG(gemSGMap[foundGem.id]);
-                } else {
-                  setCalcGemType("custom");
-                  setCalcSG(foundGem.specificGravity);
-                }
-                autoSelected = true;
+          if (parsedProportions.species) {
+            const speciesLower = parsedProportions.species.toLowerCase();
+            const sortedGems = [...gemstonesDatabase].sort((a, b) => b.name.length - a.name.length);
+            const foundGem = sortedGems.find((g) => {
+              const nameLower = g.name.toLowerCase();
+              const speciesLowerDb = g.species.toLowerCase();
+              return (
+                speciesLower.includes(nameLower) ||
+                speciesLower.includes(speciesLowerDb) ||
+                nameLower.includes(speciesLower) ||
+                speciesLowerDb.includes(speciesLower)
+              );
+            });
+            if (foundGem) {
+              setSelectedGemId(foundGem.id);
+              if (gemSGMap[foundGem.id]) {
+                setCalcGemType(foundGem.id);
+                setCalcSG(gemSGMap[foundGem.id]);
+              } else {
+                setCalcGemType("custom");
+                setCalcSG(foundGem.specificGravity);
               }
+              autoSelected = true;
             }
-          } catch (e) {
-            console.error("Could not parse estimated proportions JSON:", e);
           }
+        } catch (e) {
+          console.error("Could not parse estimated proportions JSON:", e);
         }
-
-        if (!autoSelected) {
-          autoSelectIdentifiedGem(fullText);
-        }
-      } else {
-        setPhotoReport(`Error analyzing image: ${data.error || "Visual processing offline."}`);
       }
+
+      if (!autoSelected) {
+        autoSelectIdentifiedGem(fullText);
+      }
+      fetchBillingStatus().then(setBilling).catch(() => {});
     } catch (err: any) {
-      setPhotoReport(`Error: Visual pipeline connection failed. ${err.message}`);
+      if (handleQuotaError(err)) {
+        setPhotoReport(`Limit reached: ${err.message}`);
+      } else {
+        setPhotoReport(`Error: Visual pipeline connection failed. ${err.message}`);
+      }
     } finally {
       setIsAnalyzingPhoto(false);
     }
@@ -740,27 +775,29 @@ export default function App() {
     setIsChatting(true);
 
     try {
-      const history = chatMessages.map(msg => ({
+      const history = chatMessages.map((msg) => ({
         role: msg.role === "user" ? "user" : "model",
-        text: msg.text
+        text: msg.text,
       }));
 
-      const res = await fetch("/api/gemini/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: textToSend,
-          history
-        }),
+      const data = await geminiPost("/api/gemini/ask", {
+        message: textToSend,
+        history,
       });
-      const data = await res.json();
-      if (res.ok) {
-        setChatMessages(prev => [...prev, { role: "assistant", text: data.text }]);
-      } else {
-        setChatMessages(prev => [...prev, { role: "assistant", text: `Error: ${data.error || "Unable to retrieve response."}` }]);
-      }
+      setChatMessages((prev) => [...prev, { role: "assistant", text: data.text }]);
+      fetchBillingStatus().then(setBilling).catch(() => {});
     } catch (err: any) {
-      setChatMessages(prev => [...prev, { role: "assistant", text: `Connection failure: ${err.message}` }]);
+      if (handleQuotaError(err)) {
+        setChatMessages((prev) => [
+          ...prev,
+          { role: "assistant", text: `Limit reached: ${err.message} Open Pro to continue.` },
+        ]);
+      } else {
+        setChatMessages((prev) => [
+          ...prev,
+          { role: "assistant", text: `Connection failure: ${err.message}` },
+        ]);
+      }
     } finally {
       setIsChatting(false);
     }
@@ -792,9 +829,35 @@ export default function App() {
                 <span className="text-[#D4AF37]/80">not a laboratory certificate</span>
               </p>
             </div>
+            <button
+              type="button"
+              onClick={() => {
+                setPaywallReason(null);
+                setPaywallOpen(true);
+              }}
+              className="shrink-0 flex flex-col items-end gap-1 rounded-xl border border-[#D4AF37]/35 bg-black/50 px-2.5 sm:px-3 py-2 hover:border-[#D4AF37]/70 transition-colors"
+            >
+              <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-mono font-black uppercase tracking-wider text-[#D4AF37]">
+                <Crown className="w-3.5 h-3.5" />
+                {billing?.isPaid ? billing.planName : "Free"}
+              </span>
+              <span className="text-[9px] sm:text-[10px] text-white/45 font-medium">
+                {billing?.usage
+                  ? `AI ${billing.usage.weekCalls}${billing.usage.weekLimit != null ? `/${billing.usage.weekLimit}` : ""} wk`
+                  : "Plans"}
+              </span>
+            </button>
           </div>
         </div>
       </header>
+
+      <PaywallModal
+        open={paywallOpen}
+        onClose={() => setPaywallOpen(false)}
+        billing={billing}
+        onBillingChange={setBilling}
+        reason={paywallReason}
+      />
 
       {/* Sticky nav — short labels on phone, full on tablet+ */}
       <div className="sticky top-0 z-50 w-full bg-gradient-to-b from-[#FFFFFF] via-[#E8EEF5] to-[#CBD5E1] border-b-2 border-[#94A3B8]/80 shadow-[0_6px_18px_-6px_rgba(0,0,0,0.55)]">
