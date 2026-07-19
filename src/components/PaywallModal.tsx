@@ -84,17 +84,25 @@ export default function PaywallModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 flex items-start justify-between gap-3 p-5 border-b border-white/10 bg-[#0A0A0A]/95 backdrop-blur">
-          <div>
-            <div className="text-[10px] font-mono uppercase tracking-widest text-[#D4AF37] font-bold flex items-center gap-1.5">
-              <Crown className="w-3.5 h-3.5" />
-              Gem Geek Pro
+          <div className="flex items-start gap-3 min-w-0">
+            <img
+              src="/gem-geek-icon.png"
+              alt=""
+              className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl object-cover ring-1 ring-[#D4AF37]/35 shadow-lg shrink-0"
+              aria-hidden
+            />
+            <div className="min-w-0">
+              <div className="text-[10px] font-mono uppercase tracking-widest text-[#D4AF37] font-bold flex items-center gap-1.5">
+                <Crown className="w-3.5 h-3.5" />
+                Gem Geek Pro
+              </div>
+              <h2 className="text-xl sm:text-2xl font-serif font-black text-white mt-1">
+                Unlock the full pocket lab
+              </h2>
+              <p className="text-xs sm:text-sm text-white/55 mt-1.5 leading-relaxed">
+                Catalog stays free. AI identify, photo, consult &amp; audit are Pro.
+              </p>
             </div>
-            <h2 className="text-xl sm:text-2xl font-serif font-black text-white mt-1">
-              Unlock the full pocket lab
-            </h2>
-            <p className="text-xs sm:text-sm text-white/55 mt-1.5 leading-relaxed">
-              Catalog stays free. AI identify, photo, consult &amp; audit are Pro.
-            </p>
           </div>
           <button
             type="button"

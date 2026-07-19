@@ -806,24 +806,44 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#080808] text-[#E0E0E0] font-sans antialiased selection:bg-[#D4AF37]/30 selection:text-[#FFF2B2] flex flex-col justify-between">
       
-      {/* Gem Geek brand header — NElogoMM, phone + tablet responsive */}
+      {/* Gem Geek brand header — app icon + wordmark */}
       <header className="relative w-full bg-gradient-to-b from-[#0c0e12] via-[#08090c] to-[#050506] border-b border-[#D4AF37]/25">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(212,175,55,0.08)_0%,transparent_55%)] pointer-events-none" />
         <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-5 md:px-8 py-4 sm:py-5 md:py-6">
-          <div className="flex items-center gap-3.5 sm:gap-5 md:gap-6">
-            <img
-              src="/NElogoMM.png"
-              alt="Northeast Gemological"
-              className="h-[4.25rem] w-auto sm:h-24 md:h-28 lg:h-[7.5rem] object-contain drop-shadow-[0_10px_28px_rgba(0,0,0,0.8)] flex-shrink-0 select-none"
-              draggable={false}
-            />
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
+            {/* App icon button (home) */}
+            <button
+              type="button"
+              onClick={() => setActiveTab("library")}
+              className="shrink-0 rounded-[1.1rem] sm:rounded-[1.35rem] p-0.5 bg-gradient-to-br from-[#D4AF37]/50 via-white/10 to-[#AA7C11]/30 shadow-[0_10px_28px_rgba(0,0,0,0.65)] ring-1 ring-[#D4AF37]/25 hover:ring-[#D4AF37]/55 hover:scale-[1.02] active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+              title="Gem Geek home"
+              aria-label="Gem Geek home"
+            >
+              <img
+                src="/gem-geek-icon.png"
+                alt="Gem Geek"
+                className="h-14 w-14 sm:h-[4.5rem] sm:w-[4.5rem] md:h-24 md:w-24 rounded-[0.95rem] sm:rounded-[1.15rem] object-cover select-none"
+                draggable={false}
+              />
+            </button>
             <div className="min-w-0 flex-1 text-left">
-              <p className="text-[10px] sm:text-xs md:text-sm tracking-[0.2em] sm:tracking-[0.26em] uppercase text-[#94A3B8] font-semibold">
-                Northeast Gemological&apos;s
-              </p>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-serif font-black tracking-wide bg-gradient-to-b from-[#FFF2B2] via-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent leading-tight">
-                Gem Geek
-              </h1>
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <img
+                  src="/NElogoMM.png"
+                  alt=""
+                  className="hidden xs:block h-7 w-auto sm:h-8 md:h-9 object-contain opacity-90 flex-shrink-0"
+                  aria-hidden
+                  draggable={false}
+                />
+                <div className="min-w-0">
+                  <p className="text-[10px] sm:text-xs md:text-sm tracking-[0.2em] sm:tracking-[0.26em] uppercase text-[#94A3B8] font-semibold">
+                    Northeast Gemological&apos;s
+                  </p>
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-serif font-black tracking-wide bg-gradient-to-b from-[#FFF2B2] via-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent leading-tight">
+                    Gem Geek
+                  </h1>
+                </div>
+              </div>
               <p className="mt-0.5 sm:mt-1 text-[10px] sm:text-xs md:text-sm text-[#64748B] max-w-xl leading-snug">
                 <span className="hidden sm:inline">Bench assistant · screening ID, photo notes &amp; verification · </span>
                 <span className="text-[#D4AF37]/80">not a laboratory certificate</span>
