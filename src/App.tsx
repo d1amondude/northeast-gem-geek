@@ -336,7 +336,7 @@ export default function App() {
   const [calcLength, setCalcLength] = useState<number>(6.5);
   const [calcWidth, setCalcWidth] = useState<number>(6.5);
   const [calcDepth, setCalcDepth] = useState<number>(3.96); // ~61% of 6.5mm
-  /** measured = user/caliper depth; estimated = trade depth-% from face-up */
+  /** measured = user/caliper depth; estimated = depth-% from face-up proportions */
   const [depthMode, setDepthMode] = useState<"measured" | "estimated">("estimated");
   const [depthProfile, setDepthProfile] = useState<DepthProfile>("average");
   const [weightCorrectionPct, setWeightCorrectionPct] = useState<number>(0);
@@ -386,7 +386,7 @@ export default function App() {
     if (d > 0) setCalcDepth(d);
   }, [depthMode, cutShapeId, calcLength, calcWidth, depthProfile]);
 
-  // Live carat estimator — trade/GIA-course dimensional formulas + depth-% tables
+  // Live carat estimator — industry dimensional formulas + depth-% tables
   const caratEstimate = useMemo(() => {
     return estimateCaratWeight({
       shape: cutShapeId,
@@ -423,7 +423,7 @@ export default function App() {
     } else {
       setCalcWidth(computedLength);
     }
-    // Face-up calipers → prefer trade depth-% estimate
+    // Face-up calipers → prefer depth-% estimate from proportions
     setDepthMode("estimated");
   };
 
@@ -1783,7 +1783,7 @@ export default function App() {
                       </select>
                     </div>
 
-                    {/* Depth mode: estimated (trade depth %) vs measured */}
+                    {/* Depth mode: estimated (depth %) vs measured */}
                     <div>
                       <label className="block text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest mb-1.5 opacity-80">Depth source</label>
                       <div className="grid grid-cols-2 gap-1.5">
@@ -1877,7 +1877,7 @@ export default function App() {
                         onChange={(e) => setWeightCorrectionPct(parseInt(e.target.value, 10))}
                         className="w-full accent-[#D4AF37]"
                       />
-                      <p className="text-[9px] text-white/40">Trade weight correction for thick girdle or pavilion bulge (0–18%).</p>
+                      <p className="text-[9px] text-white/40">Weight correction for thick girdle or pavilion bulge (0–18%).</p>
                     </div>
 
                   </div>
@@ -2220,7 +2220,7 @@ export default function App() {
 
                     {/* Formula Specs display */}
                     <div className="bg-black/60 p-4 rounded-xl border border-white/5 space-y-2 font-mono text-[10px] text-white/60">
-                      <div className="text-white/40 uppercase text-[9px] font-bold tracking-wider mb-1">Trade / GIA-course formula</div>
+                      <div className="text-white/40 uppercase text-[9px] font-bold tracking-wider mb-1">Industry dimensional formula</div>
                       <div className="flex justify-between gap-2">
                         <span>Cut constant:</span>
                         <span className="text-white text-right">

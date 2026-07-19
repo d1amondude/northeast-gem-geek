@@ -1,11 +1,12 @@
 /**
  * Gem Geek subscription catalog (source of truth for UI + server entitlements).
- * Research-backed structure: freemium + Pro monthly/annual hero + Trade later.
+ * Freemium + Pro monthly + Pro annual (hero). Built for jewelry trade users —
+ * no separate "trade discount" tier.
  * Apple product IDs reserved for StoreKit / RevenueCat.
  */
 
 export type PlanInterval = "none" | "week" | "month" | "year";
-export type PlanId = "free" | "pro_monthly" | "pro_annual" | "trade_monthly";
+export type PlanId = "free" | "pro_monthly" | "pro_annual";
 
 export interface PricingPlan {
   id: PlanId;
@@ -26,8 +27,6 @@ export interface PricingPlan {
   /** Hard max AI calls per day (abuse protection) */
   aiCallsPerDay: number | null;
   features: string[];
-  /** Free-tier features still available without sub */
-  freeIncludes?: string[];
   appleProductId: string | null;
   /** Internal sort / display order */
   sortOrder: number;
@@ -50,7 +49,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Full gem catalog (~148 stones) + rare*",
       "Lab cards, formulas & calipers",
       "3 AI assists per week",
-      "Educational use only",
+      "Educational / screening use only",
     ],
     appleProductId: null,
     sortOrder: 0,
@@ -97,27 +96,6 @@ export const PRICING_PLANS: PricingPlan[] = [
     ],
     appleProductId: "com.northeast.gemgeek.pro.annual",
     sortOrder: 2,
-  },
-  {
-    id: "trade_monthly",
-    name: "Trade",
-    tagline: "Bench & dealer toolkit",
-    priceUsd: 14.99,
-    priceNote: "per month",
-    interval: "month",
-    effectiveMonthlyUsd: 14.99,
-    highlighted: false,
-    storefront: true,
-    aiCallsPerWeek: 500,
-    aiCallsPerDay: 80,
-    features: [
-      "Everything in Pro",
-      "Higher AI limits for shop floor",
-      "Client PDF reports (coming)",
-      "Multi-device seat (coming)",
-    ],
-    appleProductId: "com.northeast.gemgeek.trade.monthly",
-    sortOrder: 3,
   },
 ];
 

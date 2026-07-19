@@ -55,12 +55,11 @@ app.post("/api/billing/activate", (req, res) => {
       res.status(400).json({ error: "deviceId and planId are required." });
       return;
     }
-    const allowed: PlanId[] = ["free", "pro_monthly", "pro_annual", "trade_monthly"];
+    const allowed: PlanId[] = ["free", "pro_monthly", "pro_annual"];
     if (!allowed.includes(planId)) {
       res.status(400).json({ error: "Invalid planId." });
       return;
     }
-    // Block silent free→trade abuse in prod without a key; allow free anytime
     const src = source === "promo" || source === "apple" || source === "stripe" ? source : "dev";
     if (process.env.NODE_ENV === "production" && src === "dev" && planId !== "free") {
       // Still allow for TestFlight/demo: set ALLOW_DEV_BILLING=1 on Render to test paywall

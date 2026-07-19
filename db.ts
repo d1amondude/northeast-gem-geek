@@ -156,7 +156,7 @@ export function activatePlan(
   const acc = getOrCreateAccount(deviceId);
   const now = new Date();
   let proUntil: string | null = null;
-  if (planId === "pro_monthly" || planId === "trade_monthly") {
+  if (planId === "pro_monthly") {
     const end = new Date(now);
     end.setMonth(end.getMonth() + 1);
     proUntil = end.toISOString();

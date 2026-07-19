@@ -1,11 +1,11 @@
 /**
- * Trade / GIA-course style dimensional weight estimation.
+ * Industry-style dimensional weight estimation for screening.
  *
  * Weight formulas: L×W×D (or Ø²×D) × shape factor, with SG correction from diamond.
- * Depth when face-up only: typical total depth % by shape (not a GIA "unknown depth law" —
- * standard cut proportions used for screening estimates).
+ * Depth when face-up only: typical total depth % by shape (average cut proportions
+ * used for screening estimates — not a substitute for measured depth).
  *
- * Always label results as estimates — not lab certificates.
+ * Always label results as estimates — not laboratory certificates or grading reports.
  */
 
 export type CutShapeId =

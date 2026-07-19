@@ -207,8 +207,8 @@ export default function PaywallModal({
           )}
 
           <p className="text-[10px] text-white/35 leading-relaxed text-center pt-1">
-            Educational field aid — not a GIA certificate. Subscriptions via Apple In-App Purchase on App Store
-            release. Dev activation available when ALLOW_DEV_BILLING=1.
+            Educational field aid only — not a laboratory certificate or grading report. Subscriptions via Apple
+            In-App Purchase on App Store release. Dev activation available when ALLOW_DEV_BILLING=1.
           </p>
 
           {billing?.planId !== "free" && (
