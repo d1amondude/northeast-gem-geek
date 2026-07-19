@@ -94,8 +94,8 @@ const formatGemName = (gem: Gemstone) => (gem.rare ? `${gem.name}*` : gem.name);
 
 type AppTab = "library" | "identify" | "verify" | "photo" | "consult";
 
-/** AI / lab tools — Pro only so free users stay on the simple catalog home */
-const PRO_ONLY_TABS: AppTab[] = ["photo", "identify", "verify", "consult"];
+/** Advanced lab tools — Pro only. Photo ID stays on free/trial (uses free AI quota). */
+const PRO_ONLY_TABS: AppTab[] = ["identify", "verify", "consult"];
 
 export default function App() {
   // Tab State: 'library' | 'identify' | 'verify' | 'photo' | 'consult'
@@ -111,15 +111,17 @@ export default function App() {
   const openPaywall = (reason?: string) => {
     setPaywallReason(
       reason ||
-        "Photo, Lab ID, Verify, and Consult are Pro tools. Free members use the gem catalog & calipers on Home."
+        "Lab ID, Verify, and Consult are Pro tools. Free trial includes Home catalog, calipers, and Photo ID (limited AI)."
     );
     setPaywallOpen(true);
   };
 
   const goToTab = (tab: AppTab) => {
     if (PRO_ONLY_TABS.includes(tab) && !isPro) {
+      const label =
+        tab === "identify" ? "Lab ID" : tab === "verify" ? "Verify" : "Consult";
       openPaywall(
-        `${tab === "identify" ? "Lab ID" : tab === "verify" ? "Verify" : tab === "consult" ? "Consult" : "Photo"} is a Pro lab tool. Upgrade to unlock AI diagnostics — Home catalog stays free.`
+        `${label} is a Pro lab tool. Free trial keeps Photo ID (with weekly AI limit) plus the Home catalog.`
       );
       return;
     }
@@ -944,7 +946,7 @@ export default function App() {
           <nav className="grid grid-cols-5 sm:flex sm:items-center sm:justify-center gap-0.5 sm:gap-2 md:gap-3 w-full" aria-label="Gem Geek tools">
             {([
               { id: "library" as const, short: "Home", long: "Home", pro: false },
-              { id: "photo" as const, short: "Photo", long: "Photo", pro: true },
+              { id: "photo" as const, short: "Photo", long: "Photo", pro: false },
               { id: "identify" as const, short: "Lab", long: "Lab ID", pro: true },
               { id: "verify" as const, short: "Verify", long: "Verify", pro: true },
               { id: "consult" as const, short: "Chat", long: "Consult", pro: true },
@@ -1469,9 +1471,25 @@ export default function App() {
 
         {/* ==================== TAB 2: AI PHOTO IDENTIFIER (MULTIMODAL SPECIMEN CAM) ==================== */}
         {activeTab === "photo" && (
-          <ProToolGate label="Photo Analyzer">
           <div className="max-w-4xl mx-auto space-y-8">
-            
+            {!isPro && billing && (
+              <div className="rounded-xl border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-3 text-xs sm:text-sm text-amber-100/90 font-medium flex flex-wrap items-center justify-between gap-2">
+                <span>
+                  Free trial · Photo ID uses your weekly AI allowance (
+                  {billing.usage.remainingWeek != null
+                    ? `${billing.usage.remainingWeek} left this week`
+                    : "limited"}
+                  ).
+                </span>
+                <button
+                  type="button"
+                  onClick={() => openPaywall("Upgrade for unlimited lab AI tools.")}
+                  className="text-[#D4AF37] font-black uppercase tracking-wider text-[10px] sm:text-xs hover:text-[#FFF2B2]"
+                >
+                  Go Pro →
+                </button>
+              </div>
+            )}
             <div className="bg-[#0A0A0A] rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl relative">
               {/* Decorative brackets */}
               <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-[#D4AF37]/50"></div>
@@ -2416,7 +2434,6 @@ export default function App() {
             )}
 
           </div>
-          </ProToolGate>
         )}
 
         {/* ==================== TAB 3: AI GEMSTONE MANUAL DIAGNOSTICS ==================== */}

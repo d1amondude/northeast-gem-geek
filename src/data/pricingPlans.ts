@@ -48,8 +48,8 @@ export const PRICING_PLANS: PricingPlan[] = [
     features: [
       "Full gem catalog (~148 stones) + rare*",
       "Lab cards, formulas & calipers on Home",
-      "No Lab ID / Photo / Verify / Consult (Pro)",
-      "Educational / screening use only",
+      "Photo ID on free trial (3 AI assists / week)",
+      "Lab ID / Verify / Consult unlock with Pro",
     ],
     appleProductId: null,
     sortOrder: 0,
