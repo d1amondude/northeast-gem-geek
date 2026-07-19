@@ -73,6 +73,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Higher weekly AI allowance",
       "Job history (coming)",
     ],
+    /** App Store Connect product ID — locked */
     appleProductId: "com.northeast.gemgeek.pro.monthly",
     sortOrder: 1,
   },
@@ -94,10 +95,17 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Best price for daily use",
       "Priority for new lab tools",
     ],
+    /** App Store Connect product ID — locked (display name: Gem Geek Pro Annual) */
     appleProductId: "com.northeast.gemgeek.pro.annual",
     sortOrder: 2,
   },
 ];
+
+/** Bundle ID for Xcode / Capacitor (confirm matches App Store Connect) */
+export const APPLE_BUNDLE_ID = "com.northeast.gemgeek";
+
+/** Subscription group display name in Connect */
+export const APPLE_SUBSCRIPTION_GROUP = "Gem Geek Pro";
 
 export const PLAN_BY_ID: Record<PlanId, PricingPlan> = PRICING_PLANS.reduce(
   (acc, p) => {

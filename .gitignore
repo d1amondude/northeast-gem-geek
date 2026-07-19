@@ -8,3 +8,4 @@ coverage/
 dist/
 node_modules/
 data/gemgeek-db.json
+node_modules/
