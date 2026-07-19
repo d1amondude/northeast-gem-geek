@@ -100,7 +100,7 @@ export default function PaywallModal({
                 Unlock the full pocket lab
               </h2>
               <p className="text-xs sm:text-sm text-white/55 mt-1.5 leading-relaxed">
-                Catalog stays free. AI identify, photo, consult &amp; audit are Pro.
+                Home catalog stays free. Photo, Lab ID, Verify, Consult &amp; AI audit are Pro.
               </p>
             </div>
           </div>

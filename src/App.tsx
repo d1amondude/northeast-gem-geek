@@ -29,7 +29,8 @@ import {
   Scale,
   ZoomIn,
   X,
-  Crown
+  Crown,
+  Lock
 } from "lucide-react";
 import { gemstonesDatabase, Gemstone } from "./data/gemstones";
 import {
@@ -91,14 +92,72 @@ const getGemstoneImage = (gemOrId: Gemstone | string): string => {
 /** Rare collector stones show * after the name */
 const formatGemName = (gem: Gemstone) => (gem.rare ? `${gem.name}*` : gem.name);
 
+type AppTab = "library" | "identify" | "verify" | "photo" | "consult";
+
+/** AI / lab tools — Pro only so free users stay on the simple catalog home */
+const PRO_ONLY_TABS: AppTab[] = ["photo", "identify", "verify", "consult"];
+
 export default function App() {
   // Tab State: 'library' | 'identify' | 'verify' | 'photo' | 'consult'
-  const [activeTab, setActiveTab] = useState<"library" | "identify" | "verify" | "photo" | "consult">("library");
+  const [activeTab, setActiveTab] = useState<AppTab>("library");
 
   // --- Billing / Pro paywall ---
   const [billing, setBilling] = useState<BillingStatus | null>(null);
   const [paywallOpen, setPaywallOpen] = useState(false);
   const [paywallReason, setPaywallReason] = useState<string | null>(null);
+  /** True when user has an active paid plan */
+  const isPro = !!billing?.isPaid;
+
+  const openPaywall = (reason?: string) => {
+    setPaywallReason(
+      reason ||
+        "Photo, Lab ID, Verify, and Consult are Pro tools. Free members use the gem catalog & calipers on Home."
+    );
+    setPaywallOpen(true);
+  };
+
+  const goToTab = (tab: AppTab) => {
+    if (PRO_ONLY_TABS.includes(tab) && !isPro) {
+      openPaywall(
+        `${tab === "identify" ? "Lab ID" : tab === "verify" ? "Verify" : tab === "consult" ? "Consult" : "Photo"} is a Pro lab tool. Upgrade to unlock AI diagnostics — Home catalog stays free.`
+      );
+      return;
+    }
+    setActiveTab(tab);
+  };
+
+  /** Full-page gate if a free user somehow lands on a Pro tab */
+  const ProToolGate = ({ label, children }: { label: string; children: React.ReactNode }) => {
+    if (isPro) return <>{children}</>;
+    return (
+      <div className="max-w-lg mx-auto mt-8 sm:mt-16 bg-[#0A0A0A] border border-[#D4AF37]/30 rounded-2xl p-8 sm:p-10 text-center shadow-2xl">
+        <div className="mx-auto w-14 h-14 rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/25 flex items-center justify-center mb-4">
+          <Lock className="w-7 h-7 text-[#D4AF37]" />
+        </div>
+        <h2 className="text-2xl font-serif font-black text-white tracking-wide">{label}</h2>
+        <p className="text-sm sm:text-base text-white/60 mt-3 leading-relaxed">
+          This lab tool is for <strong className="text-[#D4AF37]">Pro</strong> members. Free access is the gem catalog,
+          rare* markers, and weight calipers on <strong className="text-white">Home</strong> — no confusing AI forms until you upgrade.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
+          <button
+            type="button"
+            onClick={() => openPaywall(`${label} requires Pro.`)}
+            className="px-5 py-3 rounded-xl bg-[#D4AF37] text-black font-black text-sm uppercase tracking-wider hover:bg-[#FFF2B2] transition-colors inline-flex items-center justify-center gap-2"
+          >
+            <Crown className="w-4 h-4" /> See Pro plans
+          </button>
+          <button
+            type="button"
+            onClick={() => goToTab("library")}
+            className="px-5 py-3 rounded-xl border border-white/15 text-white/80 font-bold text-sm uppercase tracking-wider hover:border-white/30 transition-colors"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  };
 
   useEffect(() => {
     fetchBillingStatus()
@@ -814,7 +873,7 @@ export default function App() {
             {/* App icon button (home) */}
             <button
               type="button"
-              onClick={() => setActiveTab("library")}
+              onClick={() => goToTab("library")}
               className="shrink-0 rounded-[1.1rem] sm:rounded-[1.35rem] p-0.5 bg-gradient-to-br from-[#D4AF37]/50 via-white/10 to-[#AA7C11]/30 shadow-[0_10px_28px_rgba(0,0,0,0.65)] ring-1 ring-[#D4AF37]/25 hover:ring-[#D4AF37]/55 hover:scale-[1.02] active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
               title="Gem Geek home"
               aria-label="Gem Geek home"
@@ -884,30 +943,38 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-2 sm:py-2.5">
           <nav className="grid grid-cols-5 sm:flex sm:items-center sm:justify-center gap-0.5 sm:gap-2 md:gap-3 w-full" aria-label="Gem Geek tools">
             {([
-              { id: "library" as const, short: "Home", long: "Home" },
-              { id: "photo" as const, short: "Photo", long: "Photo" },
-              { id: "identify" as const, short: "Lab", long: "Lab ID" },
-              { id: "verify" as const, short: "Verify", long: "Verify" },
-              { id: "consult" as const, short: "Chat", long: "Consult" },
-            ]).map((tab) => (
+              { id: "library" as const, short: "Home", long: "Home", pro: false },
+              { id: "photo" as const, short: "Photo", long: "Photo", pro: true },
+              { id: "identify" as const, short: "Lab", long: "Lab ID", pro: true },
+              { id: "verify" as const, short: "Verify", long: "Verify", pro: true },
+              { id: "consult" as const, short: "Chat", long: "Consult", pro: true },
+            ]).map((tab) => {
+              const locked = tab.pro && !isPro;
+              return (
               <button
                 key={tab.id}
                 id={`tab-btn-${tab.id}`}
                 type="button"
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => goToTab(tab.id)}
+                title={locked ? "Pro lab tool — upgrade to unlock" : undefined}
                 className={`min-w-0 px-1 sm:px-4 md:px-5 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-[10px] xs:text-[11px] sm:text-sm md:text-base font-serif font-black uppercase tracking-tight sm:tracking-wide transition-all relative ${
                   activeTab === tab.id
                     ? "bg-[#AA7C11]/18 text-[#8C6239] shadow-inner"
-                    : "text-[#1E293B] hover:bg-[#AA7C11]/10 hover:text-[#AA7C11]"
+                    : locked
+                      ? "text-[#64748B] hover:bg-[#AA7C11]/08 hover:text-[#8C6239]"
+                      : "text-[#1E293B] hover:bg-[#AA7C11]/10 hover:text-[#AA7C11]"
                 }`}
               >
-                <span className="sm:hidden">{tab.short}</span>
-                <span className="hidden sm:inline">{tab.long}</span>
+                <span className="inline-flex items-center justify-center gap-0.5 sm:gap-1">
+                  {locked && <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-70 shrink-0" aria-hidden />}
+                  <span className="sm:hidden">{tab.short}</span>
+                  <span className="hidden sm:inline">{tab.long}</span>
+                </span>
                 {activeTab === tab.id && (
                   <span className="absolute bottom-0.5 left-1 right-1 sm:bottom-1 sm:left-3 sm:right-3 h-[3px] bg-[#AA7C11] rounded-full" />
                 )}
               </button>
-            ))}
+            );})}
           </nav>
         </div>
       </div>
@@ -1005,11 +1072,21 @@ export default function App() {
               <div className="pt-4 border-t border-white/5 space-y-4">
                 <button
                   type="button"
-                  onClick={() => setCatalogAuditOpen(true)}
+                  onClick={() => {
+                    if (!isPro) {
+                      openPaywall("AI Catalog Auditor is a Pro lab tool.");
+                      return;
+                    }
+                    setCatalogAuditOpen(true);
+                  }}
                   className="w-full bg-gradient-to-r from-neutral-900 to-black hover:from-[#D4AF37]/10 hover:to-black text-xs sm:text-sm font-black uppercase tracking-wider text-[#D4AF37] hover:text-[#FFF2B2] py-3.5 rounded-xl border border-[#D4AF37]/20 hover:border-[#D4AF37]/40 flex items-center justify-center gap-2 transition-all shadow-md group"
                 >
-                  <Cpu className="w-4 h-4 text-[#D4AF37] group-hover:animate-pulse" />
-                  AI Catalog Auditor Lab
+                  {isPro ? (
+                    <Cpu className="w-4 h-4 text-[#D4AF37] group-hover:animate-pulse" />
+                  ) : (
+                    <Lock className="w-4 h-4 text-[#D4AF37]" />
+                  )}
+                  {isPro ? "AI Catalog Auditor Lab" : "Pro · AI Catalog Auditor"}
                 </button>
 
                 <div className="flex justify-between items-center mb-1.5 pt-1">
@@ -1119,11 +1196,6 @@ export default function App() {
                       <h4 className="text-xs sm:text-sm font-black text-[#D4AF37] uppercase tracking-wider mb-1">Description & Origin Overview</h4>
                       <p className="text-base sm:text-lg text-white leading-relaxed font-sans font-medium">{selectedGem.description}</p>
                       
-                      {/* Interactive magnifying glass or details tag */}
-                      <div className="text-xs sm:text-sm text-white/70 border border-white/10 bg-black/40 px-4 py-3 rounded-xl flex items-center gap-2.5">
-                        <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-                        <span>Hover over the visual reference card to examine microscopic details, or click to enlarge.</span>
-                      </div>
                     </div>
                     
                     <div className="md:col-span-5">
@@ -1380,11 +1452,11 @@ export default function App() {
                         ...selectedGem.commonlyMistaken
                       ])).join(", ");
                       setVerifySimulants(uniqueSims);
-                      setActiveTab("verify");
+                      goToTab("verify");
                     }}
                     className="text-xs sm:text-sm font-black text-black bg-[#D4AF37] hover:bg-[#FFF2B2] px-6 py-3 rounded-xl transition-all uppercase tracking-wider hover:scale-[1.02] active:scale-95 shadow-lg"
                   >
-                    Build Protocol for {selectedGem.name} →
+                    {isPro ? `Build Protocol for ${selectedGem.name} →` : `Pro: Build Protocol for ${selectedGem.name} →`}
                   </button>
                 </div>
 
@@ -1397,6 +1469,7 @@ export default function App() {
 
         {/* ==================== TAB 2: AI PHOTO IDENTIFIER (MULTIMODAL SPECIMEN CAM) ==================== */}
         {activeTab === "photo" && (
+          <ProToolGate label="Photo Analyzer">
           <div className="max-w-4xl mx-auto space-y-8">
             
             <div className="bg-[#0A0A0A] rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl relative">
@@ -2321,8 +2394,8 @@ export default function App() {
                   <div className="flex gap-3 w-full sm:w-auto">
                     <button
                       onClick={() => {
-                        setActiveTab("identify");
                         setLabColor(technicianNotes || "Observed from photo");
+                        goToTab("identify");
                       }}
                       className="flex-1 sm:flex-initial text-xs sm:text-sm bg-white/5 hover:bg-white/10 border border-white/15 text-[#D4AF37] font-black px-5 py-3 rounded-xl uppercase tracking-wider transition-colors active:scale-95"
                     >
@@ -2334,7 +2407,7 @@ export default function App() {
                       }}
                       className="flex-1 sm:flex-initial text-xs sm:text-sm bg-[#D4AF37] hover:bg-[#FFF2B2] text-black font-black px-5 py-3 rounded-xl uppercase tracking-wider transition-all active:scale-95 shadow-md"
                     >
-                      Copy Certificate
+                      Copy Report
                     </button>
                   </div>
                 </div>
@@ -2343,10 +2416,12 @@ export default function App() {
             )}
 
           </div>
+          </ProToolGate>
         )}
 
         {/* ==================== TAB 3: AI GEMSTONE MANUAL DIAGNOSTICS ==================== */}
         {activeTab === "identify" && (
+          <ProToolGate label="Lab ID">
           <div className="max-w-4xl mx-auto space-y-6">
             
             <div className="bg-[#0A0A0A] rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl relative">
@@ -2505,10 +2580,12 @@ export default function App() {
             )}
 
           </div>
+          </ProToolGate>
         )}
 
         {/* ==================== TAB 4: AI AUTHENTICITY PROTOCOL PLANNER ==================== */}
         {activeTab === "verify" && (
+          <ProToolGate label="Verify">
           <div className="max-w-4xl mx-auto space-y-6">
             
             <div className="bg-[#0A0A0A] rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl relative">
@@ -2644,10 +2721,12 @@ export default function App() {
             )}
 
           </div>
+          </ProToolGate>
         )}
 
         {/* ==================== TAB 5: LAB CONSULTING Q&A CHAT ==================== */}
         {activeTab === "consult" && (
+          <ProToolGate label="Consult">
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
             
             {/* Quick Suggestions (4 cols) */}
@@ -2777,12 +2856,13 @@ export default function App() {
             </div>
 
           </div>
+          </ProToolGate>
         )}
 
       </main>
 
       {/* Catalog Visual Audit Modal */}
-      {catalogAuditOpen && (
+      {catalogAuditOpen && isPro && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-all duration-300 animate-fadeIn"
           onClick={() => setCatalogAuditOpen(false)}

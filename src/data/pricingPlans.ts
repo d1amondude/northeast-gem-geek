@@ -47,8 +47,8 @@ export const PRICING_PLANS: PricingPlan[] = [
     aiCallsPerDay: 3,
     features: [
       "Full gem catalog (~148 stones) + rare*",
-      "Lab cards, formulas & calipers",
-      "3 AI assists per week",
+      "Lab cards, formulas & calipers on Home",
+      "No Lab ID / Photo / Verify / Consult (Pro)",
       "Educational / screening use only",
     ],
     appleProductId: null,
