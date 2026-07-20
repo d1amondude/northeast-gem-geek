@@ -883,7 +883,7 @@ export const gemstonesCore: Gemstone[] = [
     description: "The delicate peach-to-pink variety of Beryl, named after American gem collector J.P. Morgan.",
     commonlyMistaken: ["Pink Topaz", "Kunzite"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/de/Aquamarine_%28GeoDIL_number_-_2732%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/ea/Beryl-Quartz-morganite_brazil1.jpg",
     separationGuide: [{
       simulant: "Pink Topaz",
       properties: [{ property: "Specific Gravity", diagnosticDifference: "Topaz is significantly denser (SG 3.53) and sinks rapidly in standard density fluids; Morganite (SG 2.75) floats." }]

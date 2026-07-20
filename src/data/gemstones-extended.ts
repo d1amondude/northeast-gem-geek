@@ -85,7 +85,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Historic and modern gem simulant; gas bubbles, swirl lines, conchoidal fracture.",
     commonlyMistaken: ["Quartz", "Topaz", "Beryl", "Tourmaline"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/43/Fassade_Wilhelmstrasse_65%2C_Berlin-Mitte%2C_160417%2C_ako.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Mycenaean_Necklace%2C_glass_paste%2C_Kanellopoulos_Museum%2C_225050x.jpg",
     separationGuide: [
       {
         simulant: "Quartz",
@@ -116,7 +116,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Flame-fusion ruby; curved striae and gas bubbles separate from natural silk and zoning.",
     commonlyMistaken: ["Natural Ruby", "Red Spinel", "Garnet"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/17/Corundum-215330.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/67/Synthetic_sapphire%2C_ruby_and_emerald.gk.jpg",
     separationGuide: [
       {
         simulant: "Natural Ruby",
@@ -147,7 +147,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Common lab sapphire; curved color bands and bubbles vs natural angular zoning and silk.",
     commonlyMistaken: ["Natural Sapphire", "Tanzanite", "Spinel"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/87/Logan_Sapphire_10956420_cropped.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Synthetic_sapphire_1.jpg",
     separationGuide: [
       {
         simulant: "Natural Sapphire",
@@ -209,7 +209,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Chemically diamond; separation needs UV fluorescence patterns, spectroscopy, or lab report.",
     commonlyMistaken: ["Natural Diamond", "Moissanite"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Rough_Diamond.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/29/CVD_diamond.jpg",
     separationGuide: [
       {
         simulant: "Natural Diamond",
@@ -302,7 +302,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Fancy yellow diamond; spectroscopy and fluorescence aid type classification.",
     commonlyMistaken: ["Yellow Sapphire", "Citrine", "CZ"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Rough_Diamond.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Tiffany_Diamond2.jpg",
     separationGuide: [
       {
         simulant: "Yellow Sapphire",
@@ -395,7 +395,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare asteriated ruby; fine silk network produces 6-ray star.",
     commonlyMistaken: ["Star Sapphire", "Garnet", "Synthetic Star Ruby"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/17/Corundum-215330.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Star_ruby.jpg",
     separationGuide: [
       {
         simulant: "Star Sapphire",
@@ -426,7 +426,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Common fancy sapphire; separate from topaz/citrine by RI/SG.",
     commonlyMistaken: ["Citrine", "Topaz", "Heliodor"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/87/Logan_Sapphire_10956420_cropped.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/90/Yellow_sapphire_oval_gemstone.JPG",
     separationGuide: [
       {
         simulant: "Citrine",
@@ -457,7 +457,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Corundum between ruby and colorless; trade boundary with ruby is lab/policy dependent.",
     commonlyMistaken: ["Ruby", "Pink Spinel", "Morganite", "Tourmaline"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/87/Logan_Sapphire_10956420_cropped.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Sapphire_pink_octagon_1.17cts.jpg",
     separationGuide: [
       {
         simulant: "Ruby",
@@ -488,7 +488,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Diamond simulant historically; lower RI/dispersion than diamond, doubly refractive.",
     commonlyMistaken: ["Diamond", "CZ", "Topaz"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/87/Logan_Sapphire_10956420_cropped.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4d/LEUCO_SAPPHIRE_FROM_KAN%2C_RUSSIA%2C_COLL._ROSTISLAW_KAISCHEW_AT_THE_EARTH_AND_MAN_MUSEUM_IN_SOFIA.jpg",
     separationGuide: [
       {
         simulant: "Diamond",
@@ -519,7 +519,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Yellow beryl; separate from topaz/citrine by SG and RI.",
     commonlyMistaken: ["Citrine", "Topaz", "Yellow Sapphire"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Beryl09.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/db/Heliodor-G-EmpireTheWorldOfGems.jpg",
     separationGuide: [
       {
         simulant: "Citrine",
@@ -550,7 +550,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Colorless beryl; may be irradiated to colors—check origin claims carefully.",
     commonlyMistaken: ["Rock Crystal", "Topaz", "White Sapphire"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Beryl09.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Goshenit-G-EmpireTheWorldOfGems.jpg",
     separationGuide: [
       {
         simulant: "Rock Crystal",
@@ -581,7 +581,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Extremely rare Utah red beryl; tiny crystals, high value—often confused with pezzottaite.",
     commonlyMistaken: ["Pezzottaite", "Rubellite", "Spinel"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/69/Beryl-23651.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/48/RedBeryl-G-EmpireTheWorldOfGems.jpg",
     separationGuide: [
       {
         simulant: "Pezzottaite",
@@ -612,7 +612,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare deep-blue beryl color center; unstable to light—trade caution.",
     commonlyMistaken: ["Aquamarine", "Blue Topaz", "Sapphire"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Beryl09.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Maxixe_Mozambique.jpg",
     separationGuide: [
       {
         simulant: "Aquamarine",
@@ -643,7 +643,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Pink-red elbaite; strong pleochroism; separate from ruby by RI/SG/optic.",
     commonlyMistaken: ["Ruby", "Spinel", "Garnet"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Tourmaline-121240.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Tourmaline_var._rubellite_%28Br%C3%A9sil%29.jpg",
     separationGuide: [
       {
         simulant: "Ruby",
@@ -674,7 +674,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Blue tourmaline; often heat-treated; strong dichroism.",
     commonlyMistaken: ["Sapphire", "Aquamarine", "Tanzanite"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Tourmaline-121240.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/02/Elbaite-ch06e.jpg",
     separationGuide: [
       {
         simulant: "Sapphire",
@@ -705,7 +705,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Copper-bearing neon tourmaline; origin/chemistry (Cu) critical for trade name.",
     commonlyMistaken: ["Apatite", "Aquamarine", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Tourmaline-121240.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Tourmaline_para%C3%AFba_%28Br%C3%A9sil%29.JPG",
     separationGuide: [
       {
         simulant: "Apatite",
@@ -736,7 +736,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Vivid green Cr/V tourmaline; can mimic tsavorite/emerald.",
     commonlyMistaken: ["Tsavorite", "Emerald", "Chrome Diopside"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Tourmaline-121240.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/54/Verdelite_%28green%29_tourmaline%2C_muscovite%2C_quartz_%2826043659821%29.jpg",
     separationGuide: [
       {
         simulant: "Tsavorite",
@@ -767,7 +767,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Color-zoned tourmaline slices; classic collector and jewelry material.",
     commonlyMistaken: ["Glass", "Assembled triplets"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Tourmaline-121240.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Maine_Mineral_and_Gem_Museum%2C_Bethel_-_Elbaite_tourmaline_-_watermelon_tourmaline.jpg",
     separationGuide: [
       {
         simulant: "Glass",
@@ -798,7 +798,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Common treated blue topaz; perfect cleavage risk if hit.",
     commonlyMistaken: ["Aquamarine", "Blue Glass", "Spinel"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Topaze%2C_quartz_fum%C3%A9_1.jpg/3840px-Topaze%2C_quartz_fum%C3%A9_1.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Blue_topaz_briolettes.jpg",
     separationGuide: [
       {
         simulant: "Aquamarine",
@@ -829,7 +829,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Valued orange-pink topaz trade category; often from Ouro Preto region.",
     commonlyMistaken: ["Citrine", "Heliodor", "Sapphire"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Topaze%2C_quartz_fum%C3%A9_1.jpg/3840px-Topaze%2C_quartz_fum%C3%A9_1.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/26/Imperial_topaz_NHMLA.png",
     separationGuide: [
       {
         simulant: "Citrine",
@@ -860,7 +860,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Pink topaz; may be heated imperial; cleavage caution.",
     commonlyMistaken: ["Kunzite", "Morganite", "Tourmaline"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Topaze%2C_quartz_fum%C3%A9_1.jpg/3840px-Topaze%2C_quartz_fum%C3%A9_1.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Topaz-121980.jpg",
     separationGuide: [
       {
         simulant: "Kunzite",
@@ -891,7 +891,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Dark-body precious opal (classically Lightning Ridge); high value for play-of-color.",
     commonlyMistaken: ["Doublet/Triplet", "Synthetic Opal", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Opal-53714.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Opal-black.jpg",
     separationGuide: [
       {
         simulant: "Doublet/Triplet",
@@ -922,7 +922,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Bodycolor orange-red opal; often Mexican; care with heat/dryness.",
     commonlyMistaken: ["Carnelian", "Glass", "Garnet"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Opal-53714.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Fire_opal_in_matrix_%28Juniper_Ridge%2C_Lake_County%2C_Oregon%2C_USA%29_8.jpg",
     separationGuide: [
       {
         simulant: "Carnelian",
@@ -953,7 +953,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Opal veins in ironstone host; Australian classic.",
     commonlyMistaken: ["Doublet", "Assembled"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Opal-53714.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/17/Boulder_Opal.jpg",
     separationGuide: [
       {
         simulant: "Doublet",
@@ -984,7 +984,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Chatoyant chrysoberyl with sharp eye; finest are milk-and-honey.",
     commonlyMistaken: ["Quartz Cat's-Eye", "Tourmaline Cat's-Eye", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/50/Chrysoberyl-282796.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Cymophane.jpg",
     separationGuide: [
       {
         simulant: "Quartz Cat's-Eye",
@@ -1015,7 +1015,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare green andradite; horsetail inclusions classic for Russian material.",
     commonlyMistaken: ["Tsavorite", "Emerald", "Peridot"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/15/Tiffany_and_Company_-_Pendant_Necklace_-_Walters_572168.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Granat%2C_demantoid_-_Usakos%2C_Karibib_District%2C_Erongo_Region%2C_Namibia._Afryka..JPG",
     separationGuide: [
       {
         simulant: "Tsavorite",
@@ -1077,7 +1077,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Trade name for purplish pyrope-almandine; popular jewelry garnet.",
     commonlyMistaken: ["Ruby", "Spinel", "Tourmaline"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Garnet_Andradite20.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/72/Rhodolite1b.jpg",
     separationGuide: [
       {
         simulant: "Ruby",
@@ -1108,7 +1108,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Garnet with alexandrite-like color change; spectrum and RI separate from alexandrite.",
     commonlyMistaken: ["Alexandrite", "Sapphire", "Spinel"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Garnet_Andradite20.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/cb/Almandine_garnet_1.jpg",
     separationGuide: [
       {
         simulant: "Alexandrite",
@@ -1170,7 +1170,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "West African grossular-andradite mix; bright yellow-greens popular.",
     commonlyMistaken: ["Demantoid", "Sphene", "Chrysoberyl"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/71/Grossular-ww51a.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Andradite-Mali.jpg",
     separationGuide: [
       {
         simulant: "Demantoid",
@@ -1201,7 +1201,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Historic ruby look-alike; isotropic, octahedral crystals, no silk at 60°.",
     commonlyMistaken: ["Ruby", "Garnet", "Tourmaline"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Calcite-Spinel-dtn37a.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/cb/Red_Spinel.jpg",
     separationGuide: [
       {
         simulant: "Ruby",
@@ -1232,7 +1232,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Blue spinel; cobalt blues can be vivid—trade interest high.",
     commonlyMistaken: ["Sapphire", "Tanzanite", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Calcite-Spinel-dtn37a.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/54/Spinel-tn37a.jpg",
     separationGuide: [
       {
         simulant: "Sapphire",
@@ -1263,7 +1263,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Opaque black spinel jewelry stone; harder than many black simulants.",
     commonlyMistaken: ["Black Diamond", "Hematite", "Onyx"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Calcite-Spinel-dtn37a.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/72/Spinel_%28Pleonaste%29_%2840945046743%29.jpg",
     separationGuide: [
       {
         simulant: "Black Diamond",
@@ -1294,7 +1294,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare vivid Co-bearing blue spinel; chemistry distinguishes marketing claims.",
     commonlyMistaken: ["Sapphire", "Synthetic Spinel", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Calcite-Spinel-dtn37a.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/12/Spinel-200576.jpg",
     separationGuide: [
       {
         simulant: "Sapphire",
@@ -1418,7 +1418,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Transparent yellow orthoclase gem; cleavage requires careful setting.",
     commonlyMistaken: ["Citrine", "Topaz", "Heliodor"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/cf/Moonstone_%28iridescent_peristerite-oligoclase_feldspar%29_%28Chupa_Pegmatite_Field%2C_Mesoproterozoic%2C_1.75_to_2.10_Ga%3B_at_or_near_Chupa_Bay%2C_Karelia%2C_Russia%29_2.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/97/Orthoclase.jpg",
     separationGuide: [
       {
         simulant: "Citrine",
@@ -1449,7 +1449,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Translucent pink quartz; dumortierite or other causes of color debated.",
     commonlyMistaken: ["Kunzite", "Morganite", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/40/Amethyst_specimen.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/01/Two_rose_quartz_cabocons_1.jpg",
     separationGuide: [
       {
         simulant: "Kunzite",
@@ -1542,7 +1542,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Quartz host with oriented rutile needles—jewelry classic.",
     commonlyMistaken: ["Tourmalinated Quartz", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/32/Smoky-quartz-TUCQTD.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Rutilated_quartz.jpg",
     separationGuide: [
       {
         simulant: "Tourmalinated Quartz",
@@ -1573,7 +1573,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Chatoyant quartz after asbestos fibers; hawk's-eye is blue variant.",
     commonlyMistaken: ["Cat's-Eye Quartz", "Plastic"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Quartz_Citrine_Crystals_in_Their_Natural_Form.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/be/Tiger%27s_eye.jpg",
     separationGuide: [
       {
         simulant: "Cat's-Eye Quartz",
@@ -1604,7 +1604,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Ni-colored green chalcedony; can fade with heat/light in some material.",
     commonlyMistaken: ["Jade", "Prehnite", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Jadeite_%28GeoDIL_number_-_1607%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2b/Chrysoprase_cabochon_1.jpg",
     separationGuide: [
       {
         simulant: "Jade",
@@ -1635,7 +1635,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Translucent orange-red chalcedony; often heat-enhanced.",
     commonlyMistaken: ["Fire Opal", "Glass", "Garnet"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Jasper_outcrop_in_Yellowstone_NP.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Carnelian.jpg",
     separationGuide: [
       {
         simulant: "Fire Opal",
@@ -1666,7 +1666,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Banded chalcedony; black onyx jewelry is frequently dyed.",
     commonlyMistaken: ["Black Spinel", "Obsidian", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Obsidian.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/80/Onyx.jpg",
     separationGuide: [
       {
         simulant: "Black Spinel",
@@ -1759,7 +1759,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Green chalcedony with red hematite spots; historic amulet stone.",
     commonlyMistaken: ["Jasper", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Jasper_outcrop_in_Yellowstone_NP.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Bloodstone_5.jpg",
     separationGuide: [
       {
         simulant: "Jasper",
@@ -1790,7 +1790,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Natural amethyst-citrine zoning (Bolivia classic); synthetic exists.",
     commonlyMistaken: ["Assembled doublets", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b5/Amatista_Laye_2.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Ametrine_cut.jpg",
     separationGuide: [
       {
         simulant: "Assembled doublets",
@@ -1821,7 +1821,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Quartz with platy inclusions causing aventurescence.",
     commonlyMistaken: ["Jade", "Malachite glass", "Plastic"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Jadeite_%28GeoDIL_number_-_1607%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/84/Aventurine.jpg",
     separationGuide: [
       {
         simulant: "Jade",
@@ -1852,7 +1852,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Green quartz, often heat-treated amethyst; not emerald.",
     commonlyMistaken: ["Emerald", "Tourmaline", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/90/Peridot_%28GeoDIL_number_-_1027%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Prasiolite_from_Poland.jpg",
     separationGuide: [
       {
         simulant: "Emerald",
@@ -1883,7 +1883,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare Cr-green spodumene; cleavage makes cutting/setting delicate.",
     commonlyMistaken: ["Emerald", "Tourmaline", "Diopside"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/07/Kunzite_5.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/10/Hiddenite.jpg",
     separationGuide: [
       {
         simulant: "Emerald",
@@ -1914,7 +1914,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Li pyroxene family including kunzite/hiddenite; strong pleochroism.",
     commonlyMistaken: ["Topaz", "Beryl", "Quartz"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/07/Kunzite_5.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Spodumene.jpg",
     separationGuide: [
       {
         simulant: "Topaz",
@@ -1945,7 +1945,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Extreme birefringence and fire; soft for daily wear rings.",
     commonlyMistaken: ["Diamond", "Zircon", "Demantoid"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Bixbyite-Topaz-258621.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Titanite%2C_Albite%2C_Epidote%2C_Minas_Gerais%2C_Brazil-8799.jpg",
     separationGuide: [
       {
         simulant: "Diamond",
@@ -2038,7 +2038,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Often fibrous; cat's-eye possible; metamorphic aluminum silicate.",
     commonlyMistaken: ["Quartz Cat's-Eye", "Tourmaline"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Kyanite_crystals.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/73/Sillimanite.jpg",
     separationGuide: [
       {
         simulant: "Quartz Cat's-Eye",
@@ -2100,7 +2100,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Orthopyroxene gem; less common in jewelry.",
     commonlyMistaken: ["Diopside", "Tourmaline"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Forsterite-Olivine.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Enstatite.jpg",
     separationGuide: [
       {
         simulant: "Diopside",
@@ -2162,7 +2162,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Strong pleochroism; deep green crystals more collector than jewelry.",
     commonlyMistaken: ["Tourmaline", "Diopside"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Prehnite_-_S_Africa.jpg/640px-Prehnite_-_S_Africa.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/66/Epidote.jpg",
     separationGuide: [
       {
         simulant: "Tourmaline",
@@ -2193,7 +2193,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Can mimic jade/emerald colors; RI higher than jade.",
     commonlyMistaken: ["Jade", "Grossular", "Tourmaline"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Grossular-122165.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/90/Vesuvianite.jpg",
     separationGuide: [
       {
         simulant: "Jade",
@@ -2224,7 +2224,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Cat's-eye and purple scapolite appear in trade; cleavage care.",
     commonlyMistaken: ["Amethyst", "Kunzite", "Quartz"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Danburite-162634.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/99/Scapolite.jpg",
     separationGuide: [
       {
         simulant: "Amethyst",
@@ -2286,7 +2286,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare hard beryllium silicate; high brilliance for size.",
     commonlyMistaken: ["Diamond", "Topaz", "Quartz"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Danburite-162634.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Phenakite.jpg",
     separationGuide: [
       {
         simulant: "Diamond",
@@ -2317,7 +2317,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Bright yellow-green phosphate; soft cleavage—pendant use safer.",
     commonlyMistaken: ["Chrysoberyl", "Heliodor", "Peridot"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Danburite-162634.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/91/Mus%C3%A9um_de_Nantes_-_022_-_Brazilianite_%28Br%C3%A9sil%29.jpg",
     separationGuide: [
       {
         simulant: "Chrysoberyl",
@@ -2348,7 +2348,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Li phosphate gem; sensitive to ultrasonic/heat.",
     commonlyMistaken: ["Brazilianite", "Topaz"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Apatite_crystal_%28GeoDIL_number_-_23%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Amblygonite-mun05-37b.jpg",
     separationGuide: [
       {
         simulant: "Brazilianite",
@@ -2503,7 +2503,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Deep blue copper carbonate; soft and unstable to handling/heat.",
     commonlyMistaken: ["Lapis", "Sodalite", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/55/Malachite%2C_Zaire.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Azurite.jpg",
     separationGuide: [
       {
         simulant: "Lapis",
@@ -2596,7 +2596,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Pink manganese silicate with black manganese oxide veins.",
     commonlyMistaken: ["Rhodochrosite", "Thulite", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Rhodochrosite-170081.jpg/640px-Rhodochrosite-170081.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Rhodonite.jpg",
     separationGuide: [
       {
         simulant: "Rhodochrosite",
@@ -2627,7 +2627,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Common jade simulant; lower hardness/RI than jadeite.",
     commonlyMistaken: ["Jadeite", "Nephrite", "Chrysoprase"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Jadeite_%28GeoDIL_number_-_1607%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Serpentine.jpg",
     separationGuide: [
       {
         simulant: "Jadeite",
@@ -2720,7 +2720,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Czech tektite glass with wrinkled surface; fakes common.",
     commonlyMistaken: ["Glass", "Obsidian", "Peridot glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Forsterite-Olivine.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/82/Moldavite.jpg",
     separationGuide: [
       {
         simulant: "Glass",
@@ -2782,7 +2782,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Fossil tree resin; warm to touch; saltwater float test; inclusions prized.",
     commonlyMistaken: ["Copal", "Plastic", "Glass"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Quartz_Citrine_Crystals_in_Their_Natural_Form.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Amber.jpg",
     separationGuide: [
       {
         simulant: "Copal",
@@ -2813,7 +2813,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Compact lignitic organic gem; Victorian mourning jewelry classic.",
     commonlyMistaken: ["Onyx", "Glass", "Plastic"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Obsidian.jpg/640px-Obsidian.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Jet_%28lignite%29_low_quality.jpg",
     separationGuide: [
       {
         simulant: "Onyx",
@@ -2875,7 +2875,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "California state gem; rare barium titanium silicate; strong dispersion.",
     commonlyMistaken: ["Sapphire", "Tanzanite", "Spinel"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Sapphire_%28gem_gravel_mine%2C_Ratnapura_area%2C_Sri_Lanka%29_2_%2834726082111%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Benitoite.jpg",
     separationGuide: [
       {
         simulant: "Sapphire",
@@ -2906,7 +2906,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Once among the rarest minerals; Myanmar; brownish-red crystals.",
     commonlyMistaken: ["Ruby", "Garnet", "Zircon"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Corundum_%28Variety_trapiche_ruby%29-649829.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Painite.jpg",
     separationGuide: [
       {
         simulant: "Ruby",
@@ -2937,7 +2937,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Discovered as a cut stone mistaken for spinel; doubly refractive vs spinel.",
     commonlyMistaken: ["Spinel", "Sapphire", "Garnet"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Spinel-Pyrrhotite-153483.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Fotostrecke_Weltraritaeten-_Taaffeit-G-EmpireTheWorldOfGems.jpg",
     separationGuide: [
       {
         simulant: "Spinel",
@@ -2968,7 +2968,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare blue-green borosilicate from Madagascar; strong pleochroism.",
     commonlyMistaken: ["Tourmaline", "Apatite", "Paraíba"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Kyanite_crystals.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/64/Grandidierite.jpg",
     separationGuide: [
       {
         simulant: "Tourmaline",
@@ -2999,7 +2999,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Cs-rich raspberry beryl-group mineral; often confused with red beryl.",
     commonlyMistaken: ["Red Beryl", "Rubellite", "Morganite"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Corundum_%28Variety_trapiche_ruby%29-649829.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/34/Pezzottaite%2C_quartz%2C_albite_2.jpg",
     separationGuide: [
       {
         simulant: "Red Beryl",
@@ -3030,7 +3030,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare aluminum borate; Namibia/Myanmar crystals prized.",
     commonlyMistaken: ["Aquamarine", "Sapphire", "Apatite"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/de/Aquamarine_%28GeoDIL_number_-_2732%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/41/Jeremejevite-48273.jpg",
     separationGuide: [
       {
         simulant: "Aquamarine",
@@ -3061,7 +3061,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Beautiful but rare Be silicate; perfect cleavage challenges durability.",
     commonlyMistaken: ["Aquamarine", "Topaz", "Beryl"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/de/Aquamarine_%28GeoDIL_number_-_2732%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/06/Euclase.jpg",
     separationGuide: [
       {
         simulant: "Aquamarine",
@@ -3092,7 +3092,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Complex borosilicate; cat's-eye known; strong pleochroism.",
     commonlyMistaken: ["Tourmaline", "Enstatite", "Jade"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Kyanite_crystals.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/96/Kornerupine-500959.jpg",
     separationGuide: [
       {
         simulant: "Tourmaline",
@@ -3154,7 +3154,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Royal purple cyclosilicate; Wessels mine material famous.",
     commonlyMistaken: ["Charoite", "Amethyst", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b5/Amatista_Laye_2.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Sugilite.jpg",
     separationGuide: [
       {
         simulant: "Charoite",
@@ -3185,7 +3185,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Blue pectolite from Dominican Republic; soft for rings.",
     commonlyMistaken: ["Turquoise", "Amazonite", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Turquoise_Cerillos_Smithsonian.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Larimar.jpg",
     separationGuide: [
       {
         simulant: "Turquoise",
@@ -3216,7 +3216,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Vivid green copper cyclosilicate crystals; brittle cleavage—collector gem.",
     commonlyMistaken: ["Emerald", "Tsavorite", "Chrome Diopside"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Chrysocolla-230109.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Dioptase.jpg",
     separationGuide: [
       {
         simulant: "Emerald",
@@ -3247,7 +3247,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare vivid blue feldspathoid; German Eifel classics; soft for daily wear.",
     commonlyMistaken: ["Lapis", "Sodalite", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Sodalith_-_Rohstein.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/65/Ha%C3%BCyne.jpg",
     separationGuide: [
       {
         simulant: "Lapis",
@@ -3278,7 +3278,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Myanmar ornamental rock associated with jadeite tracts; not pure mineral species.",
     commonlyMistaken: ["Jadeite", "Chloromelanite", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Jadeite_%28GeoDIL_number_-_1607%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/14/Mawsitsit_%28chromian_jade%29_%28Namshamaw_Deposit%2C_Hpakan-Tawmaw_Jade_Tract%2C_Late_Jurassic%2C_147_Ma%3B_Maw_Sit_Sit%2C_near_Kansi%2C_western_Kachin_State%2C_Indo-Burma_Range%2C_northern_Burma%29_5_%2817062584510%29.jpg",
     separationGuide: [
       {
         simulant: "Jadeite",
@@ -3309,7 +3309,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Ca-tourmaline species; Madagascar slices with geometric color zones prized.",
     commonlyMistaken: ["Elbaite", "Glass doublets"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Tourmaline-121240.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Liddicoatite-t5151b.jpg",
     separationGuide: [
       {
         simulant: "Elbaite",
@@ -3340,7 +3340,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "East African pink-purple garnet trade name (Umba valley association).",
     commonlyMistaken: ["Rhodolite", "Spinel", "Sapphire"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/53/Garnet_-_Spessartine_crystal_detail.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Malaya-garnet-Lizunova-Fine-Jewels-Sydney-jeweller-Chifley-Square.jpg",
     separationGuide: [
       {
         simulant: "Rhodolite",
@@ -3371,7 +3371,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Tenebrescent sodalite; color changes with light exposure—collector favorite.",
     commonlyMistaken: ["Amethyst", "Fluorite", "Glass"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Sodalith_-_Rohstein.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Hackmanite_sous_UVL.JPG",
     separationGuide: [
       {
         simulant: "Amethyst",
@@ -3433,7 +3433,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Zinc carbonate; high SG; soft botryoidal gems.",
     commonlyMistaken: ["Hemimorphite", "Turquoise", "Calcite"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/78/Birds_and_nature_%281903%29_%2814568670179%29.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Smithsonite.jpg",
     separationGuide: [
       {
         simulant: "Hemimorphite",
@@ -3619,7 +3619,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Epidote-pink feldspar metamorphic rock; beads and cabochons.",
     commonlyMistaken: ["Jasper", "Serpentine"],
     rare: false,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Colored_minerals_closeup.jpg",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/36/Unakite.jpg",
     separationGuide: [
       {
         simulant: "Jasper",
