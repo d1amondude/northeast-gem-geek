@@ -333,7 +333,7 @@ export const gemstonesExtended: Gemstone[] = [
     description: "Rare sapphire color trade name; strict hue windows—many 'pad' stones are heated fancy sapphire.",
     commonlyMistaken: ["Pink Sapphire", "Orange Sapphire", "Spinel"],
     rare: true,
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/87/Logan_Sapphire_10956420_cropped.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/24/Padparadscha_sapphire.jpg",
     separationGuide: [
       {
         simulant: "Pink Sapphire",
