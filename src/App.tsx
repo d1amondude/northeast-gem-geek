@@ -587,42 +587,25 @@ export default function App() {
     }
   };
 
-  // Lock page scroll while measuring so the screen doesn't move under the finger/stylus
+  // Measuring mode: draw on photo without the page scrolling under the finger.
+  // Do NOT freeze the whole page (body position:fixed) — that often freezes with
+  // the photo scrolled off-screen, so calipers can't be used on the specimen.
   const measuringActive =
     caliperActive && (caliperDragMode !== "none" || isDraggingCaliperLine);
 
+  const viewfinderRef = useRef<HTMLDivElement | null>(null);
+
+  // Bring the photo into view when a draw mode starts (user often toggled tools below)
   useEffect(() => {
     if (!measuringActive) return;
-    const html = document.documentElement;
-    const body = document.body;
-    const prev = {
-      htmlOverflow: html.style.overflow,
-      bodyOverflow: body.style.overflow,
-      bodyTouch: body.style.touchAction,
-      bodyPos: body.style.position,
-      bodyTop: body.style.top,
-      bodyWidth: body.style.width,
-      scrollY: window.scrollY,
-    };
-    body.style.position = "fixed";
-    body.style.top = `-${prev.scrollY}px`;
-    body.style.width = "100%";
-    body.style.overflow = "hidden";
-    body.style.touchAction = "none";
-    html.style.overflow = "hidden";
-    return () => {
-      html.style.overflow = prev.htmlOverflow;
-      body.style.overflow = prev.bodyOverflow;
-      body.style.touchAction = prev.bodyTouch;
-      body.style.position = prev.bodyPos;
-      body.style.top = prev.bodyTop;
-      body.style.width = prev.bodyWidth;
-      window.scrollTo(0, prev.scrollY);
-    };
-  }, [measuringActive]);
+    const el = viewfinderRef.current;
+    if (!el) return;
+    // Center the viewfinder so Length/Width/Shank drawing has a visible photo
+    el.scrollIntoView({ block: "center", behavior: "smooth", inline: "nearest" });
+  }, [measuringActive, caliperDragMode]);
 
-  // Non-passive touchmove so preventDefault stops scroll on iOS/Android (React listeners are often passive)
-  const viewfinderRef = useRef<HTMLDivElement | null>(null);
+  // Non-passive touchmove on the viewfinder only — stop scroll-while-drawing on iOS
+  // without locking the rest of the page (user can still scroll to tools if needed).
   useEffect(() => {
     const el = viewfinderRef.current;
     if (!el || !measuringActive) return;
@@ -1507,8 +1490,14 @@ export default function App() {
 
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start pt-2">
                 
-                {/* Camera / Viewfinder Workspace (5 cols) */}
-                <div className="md:col-span-5 flex flex-col gap-4">
+                {/* Camera / Viewfinder Workspace (5 cols) — sticky while measuring so photo stays on screen */}
+                <div
+                  className={`md:col-span-5 flex flex-col gap-4 ${
+                    measuringActive
+                      ? "sticky top-2 z-30 -mx-1 px-1 pb-2 bg-[#0c0e12]/95 backdrop-blur-sm rounded-2xl"
+                      : ""
+                  }`}
+                >
                   
                   <span className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest block">Laboratory Viewfinder</span>
                   
@@ -1524,7 +1513,7 @@ export default function App() {
                     onTouchEnd={handleCaliperMouseUp}
                     className={`relative aspect-square bg-black rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center group shadow-inner ${
                       measuringActive
-                        ? "cursor-crosshair select-none touch-none overscroll-none ring-2 ring-[#D4AF37]/40"
+                        ? "cursor-crosshair select-none touch-none overscroll-none ring-2 ring-[#D4AF37]/40 shadow-[0_0_0_1px_rgba(212,175,55,0.25)]"
                         : caliperActive && caliperDragMode !== "none"
                           ? "cursor-crosshair select-none"
                           : ""
@@ -2118,7 +2107,7 @@ export default function App() {
                           </p>
                           {measuringActive && (
                             <p className="text-[10px] font-bold text-emerald-400/90 uppercase tracking-wider bg-emerald-500/10 border border-emerald-500/25 rounded-lg px-2.5 py-1.5">
-                              Screen locked for measuring — draw on the photo without scrolling
+                              Photo pinned — draw on the viewfinder (page can still scroll to tools; drag on photo won’t scroll)
                             </p>
                           )}
 
